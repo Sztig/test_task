@@ -9,8 +9,8 @@ class LoadBalancer implements LoadBalancerInterface
 {
     public function __construct(
         private array $hosts,
-        private LoadBalancingStrategyInterface $strategy)
-    {
+        private LoadBalancingStrategyInterface $strategy
+    ) {
     }
 
     public function handleRequest(Request $request): void
