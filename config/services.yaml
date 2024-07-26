@@ -22,3 +22,21 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\LoadBalancer\LoadBalancer:
+        arguments:
+            $hosts:
+                - '@App\LoadBalancer\Host\Host'
+                - '@App\LoadBalancer\Host\Host'
+                - '@App\LoadBalancer\Host\Host'
+            $strategy: '@App\LoadBalancer\Strategy\RoundRobinStrategy'
+
+    App\LoadBalancer\LoadBalancerInterface: '@App\LoadBalancer\LoadBalancer'
+
+    App\LoadBalancer\Host\Host: ~
+
+    App\LoadBalancer\Strategy\RoundRobinStrategy: ~
+
+    App\Controller\LoadBalancerController:
+        arguments:
+            $loadBalancer: '@App\LoadBalancer\LoadBalancerInterface'
